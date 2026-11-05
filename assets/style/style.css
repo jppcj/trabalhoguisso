@@ -1,0 +1,394 @@
+/*Gestão de tarefas — style.css
+   Paleta: papel (#f3f5f4), tinta (#1f2a2e), verde-feito (#2f7d5b),
+   âmbar-pendente (#b9741a), vermelho-excluir (#b4382f) */
+
+:root {
+    --fundo: #f3f5f4;
+    --cartao: #ffffff;
+    --tinta: #1f2a2e;
+    --tinta-suave: #5d6b70;
+    --linha: #dde3e1;
+    --feito: #2f7d5b;
+    --feito-fundo: #e3f1ea;
+    --pendente: #b9741a;
+    --pendente-fundo: #faeed9;
+    --perigo: #b4382f;
+    --perigo-fundo: #f9e4e2;
+    --foco: #1d5fd1;
+    --raio: 10px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 2.5rem 1rem 4rem;
+    background: var(--fundo);
+    color: var(--tinta);
+    font-family: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Estrutura */
+
+.container {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.topo {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.875rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.resumo {
+    margin: 0.25rem 0 0;
+    color: var(--tinta-suave);
+    font-size: 0.95rem;
+}
+
+/* Navegação */
+
+.menu {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+a {
+    color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--foco);
+    outline-offset: 2px;
+}
+
+/* Botões */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.1rem;
+    border: 1px solid var(--tinta);
+    border-radius: var(--raio);
+    background: var(--tinta);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.btn:hover {
+    background: #34444a;
+    border-color: #34444a;
+}
+
+.btn-claro {
+    background: var(--cartao);
+    color: var(--tinta);
+    border-color: var(--linha);
+}
+
+.btn-claro:hover {
+    background: #eaefed;
+    border-color: #c8d1ce;
+}
+
+.btn-perigo {
+    background: var(--perigo);
+    border-color: var(--perigo);
+}
+
+.btn-perigo:hover {
+    background: #962e26;
+    border-color: #962e26;
+}
+
+/* Lista de tarefas */
+
+.lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: var(--cartao);
+    border: 1px solid var(--linha);
+    border-radius: var(--raio);
+    overflow: hidden;
+}
+
+.tarefa {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.9rem 1.1rem;
+    border-bottom: 1px solid var(--linha);
+}
+
+.tarefa:last-child {
+    border-bottom: 0;
+}
+
+.marcar {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 2px solid var(--pendente);
+    border-radius: 50%;
+    background: transparent;
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.marcar:hover {
+    background: var(--pendente-fundo);
+}
+
+.marcar svg {
+    width: 1rem;
+    height: 1rem;
+    opacity: 0;
+}
+
+.tarefa.concluida .marcar {
+    background: var(--feito);
+    border-color: var(--feito);
+}
+
+.tarefa.concluida .marcar:hover {
+    background: #266649;
+}
+
+.tarefa.concluida .marcar svg {
+    opacity: 1;
+}
+
+.nome {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.tarefa.concluida .nome {
+    color: var(--tinta-suave);
+    text-decoration: line-through;
+    text-decoration-color: #9aa6a3;
+}
+
+/* Etiqueta de situação */
+.situacao {
+    flex: none;
+    padding: 0.15rem 0.65rem;
+    border-radius: 999px;
+    background: var(--pendente-fundo);
+    color: var(--pendente);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.tarefa.concluida .situacao {
+    background: var(--feito-fundo);
+    color: var(--feito);
+}
+
+/* Estado vazio */
+.vazio {
+    padding: 2rem 1.1rem;
+    text-align: center;
+    color: var(--tinta-suave);
+}
+
+/* (adicionar / excluir) */
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding: 1.5rem;
+    background: var(--cartao);
+    border: 1px solid var(--linha);
+    border-radius: var(--raio);
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.campo label,
+.campo-check {
+    font-weight: 600;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid #c3cdca;
+    border-radius: var(--raio);
+    background: #fff;
+    color: var(--tinta);
+    font: inherit;
+}
+
+input[type="text"]:focus,
+select:focus {
+    border-color: var(--foco);
+}
+
+.campo-check {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+}
+
+.campo-check input {
+    width: 1.15rem;
+    height: 1.15rem;
+    accent-color: var(--feito);
+}
+
+.acoes {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+/* Mensagem de sucesso */
+
+.aviso {
+    margin: 0 0 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--raio);
+    background: var(--feito-fundo);
+    color: #1f5a41;
+    font-weight: 600;
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .tarefa {
+        flex-wrap: wrap;
+    }
+
+    .situacao {
+        order: 3;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
+
+/* Exclusão em lote */
+
+.lista-tarefas {
+    display: flex;
+    flex-direction: column;
+    max-height: 22rem;
+    overflow-y: auto;
+    background: var(--cartao);
+    border: 1px solid var(--linha);
+    border-radius: var(--raio);
+}
+
+.tarefa-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid var(--linha);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.tarefa-item:last-child {
+    border-bottom: 0;
+}
+
+.tarefa-item:hover {
+    background: #f7f9f8;
+}
+
+.tarefa-item input[type="checkbox"] {
+    flex: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin: 0;
+    accent-color: var(--perigo);
+    cursor: pointer;
+}
+
+.tarefa-item span {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.tarefa-item:has(input:checked) {
+    background: var(--perigo-fundo);
+}
+
+.tarefa-item:has(input:checked) span {
+    color: var(--perigo);
+    font-weight: 600;
+}
+
+.tarefa-item:has(input:focus-visible) {
+    outline: 3px solid var(--foco);
+    outline-offset: -3px;
+}
+
+.filtros {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn-filtro {
+    padding: 8px 14px;
+    text-decoration: none;
+    border-radius: 8px;
+    background: #eee;
+    color: #333;
+}
